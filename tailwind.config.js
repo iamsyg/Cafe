@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        peach: '#FFCF9D',  // You can name it something like 'peach'
+        peach: '#FFCF9D',  
+        peachLight: '#FFB26F',
       },
     },
   },
