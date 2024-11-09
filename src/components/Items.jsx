@@ -2,7 +2,8 @@ import React from "react";
 
 const Items = () => {
   return (
-    <div className="container mx-80 w-3/4 mt-24 flex flex-wrap gap-20">
+    
+    <div className="container mx-80 w-3/4 mt-24  flex flex-wrap gap-20">
       <a href="">
         <div className="max-w-xs mx-auto bg-slate-100 rounded-lg shadow-lg overflow-hidden">
           <img

@@ -1,23 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar'
-import Items from './components/Items'
+import { useState } from 'react';
+import './App.css';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import Items from './components/Items';
+import Profile from './pages/Profile';
+import Order from './pages/Order';
+import Annapurna from './pages/Annapurna';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  // Define routes
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <>
+          <Sidebar />
+          <Items />
+        </>
+      ),
+    },
+    {
+      path: "/profile",
+      element: (
+        <>
+          <Sidebar />
+          <Profile />
+        </>
+      ),
+    },
+    {
+      path: "/order",
+      element: (
+        <>
+          <Sidebar />
+          <Order />
+        </>
+      ),
+    },
+    {
+      path: "/annapurna",
+      element: (
+        <>
+          <Sidebar />
+          <Annapurna />
+        </>
+      ),
+    },
+  ]);
 
   return (
     <>
-      <Navbar/>
-      <div className="sidebar w-1/5 bg-peach text-black fixed top-20 left-0 h-screen p-4 text-2xl border border-black mt-2">
-      <Sidebar/>
-      </div>
-      <Items/>
+      <Navbar />
+      <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
