@@ -16,6 +16,10 @@ Currently, two official plugins are available:
 
 - npx tailwindcss init -p
 
+- npm install react-router-dom
+
 - npm run dev
+
+
 
 

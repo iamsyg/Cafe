@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -36,7 +37,7 @@ const Navbar = () => {
         </div>
 
         <div className="cart-logo font-bold text-xl ">
-          <a href="">
+          <Link to="/cart">
             <button className="gap-2 flex items-center border-2 border-black rounded-lg bg-white px-2">
               <h2>Cart</h2>
               <lord-icon
@@ -45,7 +46,7 @@ const Navbar = () => {
                 style={{ width: "30px", height: "40px" }}
               ></lord-icon>
             </button>
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
