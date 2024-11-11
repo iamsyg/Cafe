@@ -18,6 +18,8 @@ Currently, two official plugins are available:
 
 - npm install react-router-dom
 
+- npm install --save react-toastify
+
 - npm run dev
 
 

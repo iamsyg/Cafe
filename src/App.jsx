@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import Items from './components/Items';
+import Items from './pages/Items';
 import Profile from './pages/Profile';
 import Order from './pages/Order';
 import Annapurna from './pages/Annapurna';
@@ -20,7 +20,7 @@ function App() {
         <>
          <Navbar/>
           <Sidebar />
-          <Items />
+          <Items />  {/** ProductID*/}
         </>
       ),
     },
@@ -66,31 +66,10 @@ function App() {
     }
   ]);
 
-  // const routerNav = createBrowserRouter([
-
-  //   {
-  //     path: "/",
-  //     element: (
-  //       <>
-  //         <Navbar />
-  //         <Items />
-  //       </>
-  //     ),
-  //   },
-  //   {
-  //     path: "/profile",
-  //     element: (
-  //       <>
-  //         <Sidebar />
-  //         <Profile />
-  //       </>
-  //     ),
-  //   },
-  // ])
-
   return (
     <>
       {/* <Navbar /> */}
+      
       <RouterProvider router={routerSidebar} />
     </>
   );
