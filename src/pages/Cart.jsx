@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import Payment from "../components/Payment";
+import { ItemContext } from "../context/ItemContext";
+import { useEffect } from "react";
 
 const Cart = () => {
+
+
+    // ========================================
   const [quantity, setQuantity] = useState(1);
 
   const increaseQuantity = () => {
@@ -12,6 +17,34 @@ const Cart = () => {
   const decreaseQuantity = () => {
     setQuantity((prevQuantity) => Math.max(1, prevQuantity - 1));
   };
+
+//   ======================================
+
+
+  const {productItems, currency, cartItems}=useContext(ItemContext);
+  
+  const [cartData, setCartData] = useState([]);
+
+  useEffect(() => {
+    const tempData=[];
+    for(const items in cartItems)
+    {
+        for(const item in cartItems[items])
+        {
+            if(cartItems[items][item]>0)
+            {
+                tempData.push({
+                    _id: items,
+                    quantity: cartItems[items][item]
+                })
+            }
+        }
+    }
+
+    console.log(tempData);
+  }, [cartItems])
+  
+
 
   return (
     <>
