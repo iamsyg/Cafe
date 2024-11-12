@@ -20,7 +20,35 @@ Currently, two official plugins are available:
 
 - npm install --save react-toastify
 
+- npm init -y
+
+- npm i cors 
+
+- npm i dotenv 
+
+- npm i express 
+
+- npm i jsonwebtoken 
+
+- npm i mongoose 
+
+- npm i multer
+
+- npm i nodemon 
+
+- npm i razorpay 
+
+- npm i stripe 
+
+- npm i validator 
+
+- npm i cloudinary 
+
+- npm i bcrypt
+
 - npm run dev
+
+- npm run server 
 
 
 
