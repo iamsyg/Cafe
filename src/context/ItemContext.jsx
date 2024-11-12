@@ -1,13 +1,17 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { products } from "../assets/assets";
 
-export const ItemContext = createContext(); // Add parentheses to create the context
+export const ItemContext = createContext();
 
 const ItemContextProvider = (props) => {
     const currency = "Rs";
+    const [search, setSearch] = useState('');  // Add search state
 
     const value = {
-       products, currency
+       products, 
+       currency,
+       search,    // Provide the search state
+       setSearch  // Provide the setSearch function
     };
 
     return (
