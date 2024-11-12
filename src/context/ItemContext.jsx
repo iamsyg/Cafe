@@ -29,13 +29,21 @@ const ItemContextProvider = (props) => {
         console.log("Updated cartItems:", cartItems); // Check cartItems in console
     }, [cartItems]);
 
+    const updateQuantity=async (itemId,size, quantity) => {
+        
+        let cartData=structuredClone(cartItems);
+        cartData[itemId][size]=quantity;
+        setCartItems(cartData);
+    }
+
     const value = {
         products,
         currency,
         search,
         setSearch,
         cartItems,
-        addToCart, // Add addToCart function to context value
+        addToCart, 
+        updateQuantity
     };
 
     return (
