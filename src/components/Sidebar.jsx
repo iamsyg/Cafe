@@ -19,6 +19,21 @@ const Sidebar = () => {
           </button>
         </NavLink>
       </div>
+      {/* Login Section */}
+      <div className="items flex justify-center my-5">
+        <NavLink className={"hover:text-red-300"} to="/login">
+          <button className="flex gap-2 md:gap-3 items-center p-2 md:p-3">
+            <h2 className="text-base md:text-lg font-semibold">Login</h2>
+            <lord-icon
+              src="https://cdn.lordicon.com/kdduutaw.json"
+              trigger="hover"
+              stroke="bold"
+              colors="primary:#121331,secondary:#000000"
+              style={{ width: "20px", height: "20px" }}
+            ></lord-icon>
+          </button>
+        </NavLink>
+      </div>
       {/* Profile Section */}
       <div className="profile flex justify-center my-5">
         <NavLink className={"hover:text-red-300"} to="/profile">
