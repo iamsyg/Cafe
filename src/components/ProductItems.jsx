@@ -1,14 +1,40 @@
 import React, { useContext } from 'react';
 import { ItemContext } from '../context/ItemContext';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify'; // Only import `toast` here
+import { useState } from 'react';
+import assets from '../assets/assets';
+import { useEffect } from 'react';
+import Items from '../pages/Items';
 
 const ProductItems = ({ id, image, name, price }) => {
-    const { currency, addToCart } = useContext(ItemContext);
+    const {products, currency, addToCart } = useContext(ItemContext);
+
+    const {productId}=useParams();
+    // const [image, setImage] = useState('')
+
+    // const fetchProductData=async () => {
+      
+    //     products.map((item)=>{
+    //         if(item._id===productId)
+    //         {
+    //             setProductData(item);
+    //             setImage(item.image[0]);
+    //             console.log(item);
+    //             return null;
+    //         }
+    //     })
+    // }
+
+    // useEffect(() => {
+    //   fetchProductData();
+    
+    // }, [productId])
+    
+    
 
     const handleAddToCart = () => {
-        const size = "default"; // or another size if applicable
-        addToCart(id, size);
+        addToCart(id, name);
 
         // Show toast notification
         toast.success("Added to cart", {
@@ -22,8 +48,11 @@ const ProductItems = ({ id, image, name, price }) => {
         });
     };
 
-    return (
+    return  (
+        
         <div className="max-w-xs mx-auto bg-slate-100 rounded-lg shadow-lg overflow-hidden">
+
+            
             <img
                 className="w-full h-48 object-cover"
                 src={image}
