@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { products } from "../assets/assets";
+import ProductItems from "../components/ProductItems";
 
 export const ItemContext = createContext();
 
@@ -36,6 +37,32 @@ const ItemContextProvider = (props) => {
         setCartItems(cartData);
     }
 
+    const getCartAmount= () => {
+      
+        let totalAmount=0;
+        for(const items in cartItems)
+        {
+            let itemInfo=products.find((ProductItems)=>ProductItems._id===items);
+            for(const item in cartItems[items])
+            {
+                try
+                {
+                    if(cartItems[items][item]>0)
+                    {
+                        totalAmount+=itemInfo.price * cartItems[items][item];
+                    }
+                }
+                catch(error)
+                {
+
+                }
+            }
+        }
+        return totalAmount;
+    }
+    
+
+
     const value = {
         products,
         currency,
@@ -43,7 +70,8 @@ const ItemContextProvider = (props) => {
         setSearch,
         cartItems,
         addToCart, 
-        updateQuantity
+        updateQuantity,
+        getCartAmount
     };
 
     return (

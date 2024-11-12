@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import Payment from "../components/Payment";
 import { ItemContext } from "../context/ItemContext";
+import CartTotal from "../components/CartTotal";
 
 const Cart = () => {
   const { products, currency, cartItems, updateQuantity } = useContext(ItemContext);
@@ -29,6 +30,11 @@ const Cart = () => {
 
   return (
     <>
+        <div className="flex justify-center mt-24 shadow-md rounded-md w-1/2 mx-80 bg-gray-400">
+            <div className="w-full sm:w-[450px]">
+                <CartTotal/>
+            </div>
+        </div>
       <div className="payment mt-20">
         <Payment />
       </div>
