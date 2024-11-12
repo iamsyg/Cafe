@@ -6,23 +6,21 @@ import Items from './pages/Items';
 import Profile from './pages/Profile';
 import Order from './pages/Order';
 import Annapurna from './pages/Annapurna';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Cart from './pages/Cart';
-import { ToastContainer, toast } from 'react-toastify';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   // Define routes
   const routerSidebar = createBrowserRouter([
     {
       path: "/",
       element: (
         <>
-         <Navbar/>
+          <Navbar />
           <Sidebar />
-          <Items />  {/** ProductID*/}
+          <Items />
         </>
       ),
     },
@@ -30,7 +28,7 @@ function App() {
       path: "/profile",
       element: (
         <>
-        <Navbar/>
+          <Navbar />
           <Sidebar />
           <Profile />
         </>
@@ -40,7 +38,7 @@ function App() {
       path: "/order",
       element: (
         <>
-        <Navbar/>
+          <Navbar />
           <Sidebar />
           <Order />
         </>
@@ -50,7 +48,7 @@ function App() {
       path: "/annapurna",
       element: (
         <>
-        <Navbar/>
+          <Navbar />
           <Sidebar />
           <Annapurna />
         </>
@@ -60,17 +58,18 @@ function App() {
       path: "/cart",
       element: (
         <>
-        <Navbar/>
-        <Sidebar />
-        <Cart/>
+          <Navbar />
+          <Sidebar />
+          <Cart />
         </>
-      )
+      ),
     }
   ]);
 
   return (
     <>
-      {/* <Navbar /> */}
+      {/* ToastContainer added for global access to notifications */}
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} closeOnClick pauseOnHover draggable theme="light" />
       
       <RouterProvider router={routerSidebar} />
     </>

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { ItemContext } from '../context/ItemContext';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify'; // Only import `toast` here
 
 const ProductItems = ({ id, image, name, price }) => {
     const { currency, addToCart } = useContext(ItemContext);
@@ -8,6 +9,17 @@ const ProductItems = ({ id, image, name, price }) => {
     const handleAddToCart = () => {
         const size = "default"; // or another size if applicable
         addToCart(id, size);
+
+        // Show toast notification
+        toast.success("Added to cart", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+        });
     };
 
     return (
@@ -23,7 +35,9 @@ const ProductItems = ({ id, image, name, price }) => {
                     Price: {currency} {price}
                 </p>
                 <Link to="">
-                    <button onClick={handleAddToCart} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    <button 
+                        onClick={handleAddToCart}
+                        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                         Add to Cart
                     </button>
                 </Link>
