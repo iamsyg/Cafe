@@ -1,45 +1,77 @@
-import { v2 as cloudiary } from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
+import productModel from "../models/productModel.js";
+
+// Cloudinary configuration (if not configured globally)
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const addProduct = async (req, res) => {
-  
+  try {
+    const { name, description, price, category } = req.body;
+    const image1 = req.files?.image1?.[0]; // Ensure image1 is accessed correctly
+    const images = [image1].filter((item) => item !== undefined);
 
+    // Upload images to Cloudinary and get URLs
+    let imageUrl = await Promise.all(
+      images.map(async (item) => {
+        let result = await cloudinary.uploader.upload(item.path, { resource_type: "image" });
+        return result.secure_url;
+      })
+    );
+
+    // Prepare product data
+    const productData = {
+      name,
+      description,
+      category,
+      price: Number(price),
+      image: imageUrl,
+    };
+
+    console.log(productData); // Log data for debugging
+
+    const product = new productModel(productData);
+    await product.save();
+
+    res.json({ success: true, message: "Product added" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+const listProducts = async (req, res) => {
+  try {
+    const products = await productModel.find({});
+    res.json({ success: true, products });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+const removeProduct = async (req, res) => {
+  try {
+    const { id } = req.body; // Expecting `id` in request body
+    await productModel.findByIdAndDelete(id); // Delete by ID
+    res.json({ success: true, message: "Product removed" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+const singleProduct=async (req, res) => {
+  
     try {
         
-        const {name, description, price, category}=req.body;
-
-        const image1= req.files.image1 && req.files.image1[0];
-
-        const images=[image1].filter((item)=>item!==undefined)
-
-        let imageUrl=await Promise.all(
-            images.map(async (item)=>{
-                 
-                let result=await cloudiary.uploader.upload(item.path, {resource_type:"image"});
-                return result.secure_url;
-            })
-        )
-
-        console.log(name, description, price, category)
-        console.log(imageUrl);
-
-        res.json({})
     } catch (error) {
         
-        console.log(error)
-        res.json({success: false, message: error.message})
     }
 }
 
 
-const listProducts = async (req, res) => {
-  
-}
-
-const removeProduct = async (req, res) => {
-  
-}
-
-
-
-export {listProducts, addProduct, removeProduct}
-
+export { listProducts, addProduct, removeProduct, singleProduct };
