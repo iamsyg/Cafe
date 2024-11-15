@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
@@ -8,12 +9,22 @@ import { Routes, Route } from "react-router-dom";
 import Add from "./pages/Add"
 import List from "./pages/List"
 import Orders from "./pages/Orders"
+import Login from "./components/Login";
+import { ToastContainer } from 'react-toastify';
+
+export const backendUrl=import.meta.env.VITE_BACKEND_URL
 
 function App() {
   const [count, setCount] = useState(0);
+  const[token,setToken]=useState('');
+
+ 
 
   return (
-    <>
+    <div className="bg-gray-50 min=h-screen">
+      <ToastContainer/>
+    {token === ""
+      ? <Login setToken={setToken} /> : <>
       <Navbar />
       <div className="flex w-full">
         <Sidebar />
@@ -26,6 +37,8 @@ function App() {
         </div>
       </div>
     </>
+    }
+    </div>
   );
 }
 
