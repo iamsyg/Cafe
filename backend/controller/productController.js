@@ -10,7 +10,7 @@ cloudinary.config({
 
 const addProduct = async (req, res) => {
   try {
-    const { name, description, price, category } = req.body;
+    const { name, price} = req.body;
     const image1 = req.files?.image1?.[0]; // Ensure image1 is accessed correctly
     const images = [image1].filter((item) => item !== undefined);
 
@@ -25,8 +25,6 @@ const addProduct = async (req, res) => {
     // Prepare product data
     const productData = {
       name,
-      description,
-      category,
       price: Number(price),
       image: imageUrl,
     };

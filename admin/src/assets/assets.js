@@ -17,12 +17,14 @@ export const products = [
         name: "Sandwich",
         price: 100,
         image: assets.image1, // Accessing the image through `assets`
+        
     },
     {
         _id: "bbbb",
         name: "Burger",
         price: 150,
         image: assets.image3, // Accessing the image through `assets`
+       
     }
 ];
 
