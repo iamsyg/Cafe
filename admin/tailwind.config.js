@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        peach: '#FFCF9D',  
+        peachLight: '#FFB26F',
+      },
+    },
   },
   plugins: [],
 }
