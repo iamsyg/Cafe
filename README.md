@@ -8,7 +8,9 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
-# Dependencies
+## Dependencies
+
+# Frontend
 
 - npm install
 
@@ -19,6 +21,26 @@ Currently, two official plugins are available:
 - npm install react-router-dom
 
 - npm install --save react-toastify
+
+- npm run dev
+
+# admin
+
+- npm install
+
+- npm install -D tailwindcss postcss autoprefixer
+
+- npx tailwindcss init -p
+
+- npm install axios
+
+- npm install react-router-dom
+
+- npm install --save react-toastify
+
+- npm run dev
+
+# backend
 
 - npm init -y
 
@@ -45,8 +67,6 @@ Currently, two official plugins are available:
 - npm i cloudinary 
 
 - npm i bcrypt
-
-- npm run dev
 
 - npm run server 
 
