@@ -15,6 +15,8 @@ import { useEffect } from "react";
 
 export const backendUrl=import.meta.env.VITE_BACKEND_URL
 
+export const currency="Rs";
+
 function App() {
 
 
@@ -24,6 +26,8 @@ function App() {
     localStorage.setItem("token", token)
   
   }, [token])
+
+  
   
 
   return (
