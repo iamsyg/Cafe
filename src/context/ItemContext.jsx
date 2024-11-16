@@ -1,13 +1,17 @@
 import { createContext, useState, useEffect } from "react";
-import { products } from "../assets/assets";
+
 import ProductItems from "../components/ProductItems";
+import axios from "axios"
 
 export const ItemContext = createContext();
 
 const ItemContextProvider = (props) => {
     const currency = "Rs";
+    const backendUrl=import.meta.env.VITE_BACKEND_URL
     const [search, setSearch] = useState('');
     const [cartItems, setCartItems] = useState({});
+    const [products, setProducts] = useState([])
+
 
     const addToCart = (itemId, size) => {
         const cartData = structuredClone(cartItems);
@@ -60,8 +64,24 @@ const ItemContextProvider = (props) => {
         }
         return totalAmount;
     }
-    
 
+    const getProductData=async () => {
+      
+        try {
+            
+            const response=await axios.get(backendUrl + "/api/product/list")
+            console.log(response.data)
+            
+        } catch (error) {
+            
+        }
+    }
+
+    useEffect(() => {
+      getProductData();
+    }, [])
+    
+    
 
     const value = {
         products,
@@ -71,7 +91,7 @@ const ItemContextProvider = (props) => {
         cartItems,
         addToCart, 
         updateQuantity,
-        getCartAmount
+        getCartAmount, backendUrl
     };
 
     return (
