@@ -1,14 +1,53 @@
 import React from 'react'
 import { useState } from 'react'
+import {useContext} from "react"
+import { ItemContext } from '../context/ItemContext';
+import axios from "axios"
 
 const Login = () => {
 
     const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
 
+
     const toggleForm = () => setIsLogin(!isLogin);
 
-    const onSubmitHandler=(event) => {
+    // const [currentState, setCurrentState] = useState("Sign Up")
+    const {token, setToken, nevigate, backendUrl}=useContext(ItemContext);
+
+    const [name, setName] = useState("")
+    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("");
+
+
+
+    const onSubmitHandler= async(event) => {
       event.preventDefault();
+
+      try {
+        
+        if(!isLogin)
+        {
+          const response=await axios.post(backendUrl + "/api/user/register", {name, email, password})
+          console.log(response.data);
+
+          if(response.data.success)
+          {
+            setToken(response.data.token)
+            localStorage.setItem("token", response.data.token)
+          }
+          else
+          {
+            toast.error(response.data.message);
+          }
+        }
+        else
+        {
+          const response=await axios.post(backendUrl + "/api/user/login", {email, password})
+          console.log(response.data)
+        }
+      } catch (error) {
+        
+      }
     }
     
   
@@ -27,7 +66,7 @@ const Login = () => {
                 <label className="block text-gray-700 font-medium mb-2" htmlFor="name">
                   Name
                 </label>
-                <input
+                <input onChange={(e)=>setName(e.target.value)} value={name}
                   type="text"
                   id="name"
                   placeholder="Your Name"
@@ -41,7 +80,7 @@ const Login = () => {
               <label className="block text-gray-700 font-medium mb-2" htmlFor="email">
                 Email
               </label>
-              <input
+              <input onChange={(e)=>setEmail(e.target.value)} value={email}
                 type="email"
                 id="email"
                 placeholder="Email"
@@ -54,7 +93,7 @@ const Login = () => {
               <label className="block text-gray-700 font-medium mb-2" htmlFor="password">
                 Password
               </label>
-              <input
+              <input onChange={(e)=>setPassword(e.target.value)} value={password}
                 type="password"
                 id="password"
                 placeholder="Password"

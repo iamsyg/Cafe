@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 
 import ProductItems from "../components/ProductItems";
 import axios from "axios"
+// import toast from "react-toastify"
 
 export const ItemContext = createContext();
 
@@ -11,6 +12,8 @@ const ItemContextProvider = (props) => {
     const [search, setSearch] = useState('');
     const [cartItems, setCartItems] = useState({});
     const [products, setProducts] = useState([])
+
+    const [token, setToken] = useState("");
 
 
     const addToCart = (itemId, size) => {
@@ -58,7 +61,7 @@ const ItemContextProvider = (props) => {
                 }
                 catch(error)
                 {
-
+                    toast.error(error.message)
                 }
             }
         }
@@ -70,10 +73,20 @@ const ItemContextProvider = (props) => {
         try {
             
             const response=await axios.get(backendUrl + "/api/product/list")
-            console.log(response.data)
+            
+            if(response.data.success)
+            {
+                setProducts(response.data.products)
+            }
+            else
+            {
+                toast.error(response.data.message)
+            }
             
         } catch (error) {
             
+            console.log(error);
+            toast.error(error.message);
         }
     }
 
@@ -91,7 +104,7 @@ const ItemContextProvider = (props) => {
         cartItems,
         addToCart, 
         updateQuantity,
-        getCartAmount, backendUrl
+        getCartAmount, backendUrl, token, setToken 
     };
 
     return (
